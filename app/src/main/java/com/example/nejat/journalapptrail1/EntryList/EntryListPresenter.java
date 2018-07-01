@@ -19,9 +19,12 @@ import com.example.nejat.journalapptrail1.ViewHolder.EntryHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Map;
 
@@ -69,11 +72,19 @@ public class EntryListPresenter implements EntryListContract.EntryListPresenter,
                 holder.entryDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        entryView.showDeleteAlertBuilder((adapter.getRef(position).getKey()),"Entry",passRecyclerAdapter());
-                        mDatabase = FirebaseDatabase.getInstance().getReference("Entry").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                        mDatabase.child(adapter.getRef(position).getKey()).removeValue();
-//                        notifyItemRemoved(position);
-                        adapter.notifyDataSetChanged();
+                        mDatabase = FirebaseDatabase.getInstance().getReference("Entry").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(adapter.getRef(position).getKey());
+                        mDatabase.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                dataSnapshot.getRef().removeValue();
+                                entryView.attachRecyclerView(adapter);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
 
                     }
                 });
