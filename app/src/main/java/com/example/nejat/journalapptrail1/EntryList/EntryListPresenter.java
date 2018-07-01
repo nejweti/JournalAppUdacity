@@ -18,7 +18,9 @@ import com.example.nejat.journalapptrail1.Utils.Main;
 import com.example.nejat.journalapptrail1.ViewHolder.EntryHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.util.Map;
@@ -28,6 +30,7 @@ public class EntryListPresenter implements EntryListContract.EntryListPresenter,
     private EntryListActivity entryView;
     private EntryListModel entryModel;
     private  FirebaseRecyclerAdapter adapter;
+    private DatabaseReference mDatabase;
 
     public EntryListPresenter(EntryListActivity entryView) {
         this.entryView = entryView;
@@ -41,19 +44,19 @@ public class EntryListPresenter implements EntryListContract.EntryListPresenter,
     @Override
     public FirebaseRecyclerAdapter onEntryListChanged(Query query, FirebaseRecyclerOptions<EntryModel> options) {
 
-          adapter = new FirebaseRecyclerAdapter<EntryModel, EntryHolder>(options) {
-             @NonNull
-             @Override
-             public EntryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                 View view = LayoutInflater.from(parent.getContext())
-                         .inflate(R.layout.entry_item_view,parent,false);
+        adapter = new FirebaseRecyclerAdapter<EntryModel, EntryHolder>(options) {
+            @NonNull
+            @Override
+            public EntryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.entry_item_view,parent,false);
 
 
-                 return new EntryHolder(view);
-             }
+                return new EntryHolder(view);
+            }
 
-             @Override
-             protected void onBindViewHolder(@NonNull final EntryHolder holder, final int position, @NonNull EntryModel model) {
+            @Override
+            protected void onBindViewHolder(@NonNull final EntryHolder holder, final int position, @NonNull EntryModel model) {
                 entryView.attachView(model.getTitle(),model.getContent(),model.getDate(),holder);
 
                 holder.entryUpdate.setOnClickListener(new View.OnClickListener() {
@@ -66,14 +69,15 @@ public class EntryListPresenter implements EntryListContract.EntryListPresenter,
                 holder.entryDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+//                        entryView.showDeleteAlertBuilder((adapter.getRef(position).getKey()),"Entry",passRecyclerAdapter());
+                        mDatabase = FirebaseDatabase.getInstance().getReference("Entry").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        mDatabase.child(adapter.getRef(position).getKey()).removeValue();
+//                        notifyItemRemoved(position);
                         adapter.notifyDataSetChanged();
-                        onStart();
-                        entryView.showDeleteAlertBuilder((adapter.getRef(position).getKey()),"Entry",passRecyclerAdapter());
-
 
                     }
                 });
-                 holder.expandArrow.setOnClickListener(new View.OnClickListener() {
+                holder.expandArrow.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         boolean shouldExpand = holder.expandContent.getVisibility() == View.GONE;
@@ -92,9 +96,9 @@ public class EntryListPresenter implements EntryListContract.EntryListPresenter,
 
                     }
                 });
-             }
-         };
-          return adapter;
+            }
+        };
+        return adapter;
 
     }
     public FirebaseRecyclerAdapter passRecyclerAdapter() {
@@ -138,12 +142,17 @@ public class EntryListPresenter implements EntryListContract.EntryListPresenter,
 
     @Override
     public void onsetDeletedData(DatabaseReference mDatabase,String node) {
-         entryModel.getQuery(node,this);
-         adapter.notifyDataSetChanged();
+        entryModel.getQuery(node,this);
+        adapter.notifyDataSetChanged();
 
     }
     @Override
     public void deleteFragment(String id,String node,FirebaseRecyclerAdapter adapter) {
         entryModel.deleteData(id,node,adapter,this,this);
+    }
+
+    @Override
+    public void notifyAdapter(FirebaseRecyclerAdapter adapter) {
+        entryView.attachRecyclerView(adapter);
     }
 }
