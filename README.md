@@ -1,3 +1,6 @@
+
+[Code Climate Report](https://codeclimate.com/github/nejweti/JournalAppUdacity)
+
 # Journal App(My Diary)
 My Diary is a native android application written with pure java. The app helps the users login using GoogleAuthentication using firebase.
 The user can add,review,update and delete their entries.
