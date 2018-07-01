@@ -46,11 +46,11 @@ public class EntryListModel implements EntryListContract.EntryListModel {
         mDatabase.keepSynced(true);
 
         adapter.notifyDataSetChanged();
+
         onEntryListChanged.onEntryListChanged(query,options);
 
-
-
         onSetDeletedData.onsetDeletedData(mDatabase, node);
+        onEntryListChanged.notifyAdapter(adapter);
 
     }
 
