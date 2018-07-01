@@ -31,6 +31,8 @@ public interface EntryListContract {
 
         interface onEntryListChanged {
             FirebaseRecyclerAdapter onEntryListChanged(Query query, FirebaseRecyclerOptions<EntryModel> options);
+            void notifyAdapter(FirebaseRecyclerAdapter adapter);
+
         }
         interface onSetActionBar{
             void onSetActionBar(String tile);
