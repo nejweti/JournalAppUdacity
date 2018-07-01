@@ -26,9 +26,6 @@ public interface EntryListContract {
         void startTransition(EntryHolder holder,android.support.transition.ChangeBounds transition,boolean bool);
 
     }
-    interface AlertDialogInterface{
-        void exitDecision();
-    }
 
     interface EntryListModel {
 

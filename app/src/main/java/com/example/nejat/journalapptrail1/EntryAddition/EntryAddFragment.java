@@ -119,7 +119,7 @@ public class EntryAddFragment extends DialogFragment implements View.OnClickList
 
             main = (Main) getActivity().getApplicationContext();
             mItemId = main.getItemId();
-            Log.i("updatemit",mItemId+"");
+            Log.i("updatemit", mItemId + "");
 
             if (mItemId == null) {
                 entryFragmentPresenter.saveDataEntry(title, content, dateStr);

@@ -45,10 +45,7 @@ public class EntryListActivity extends AppCompatActivity implements View.OnClick
     private FloatingActionButton addEntryBtn;
     private ImageButton entryEditBtn, entryDeleteBtn;
     private RecyclerView mRecyclerView;
-    private DatabaseReference mDatabase;
     private FirebaseRecyclerAdapter adapter;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseRecyclerOptions<EntryModel> options;
     private EntryListPresenter entryPresenter;
 
 
@@ -59,14 +56,8 @@ public class EntryListActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry_list);
         new EntryListPresenter(this);
-        entryPresenter= new EntryListPresenter(this);
-//
-//
-//        getSupportActionBar().setTitle("Hi,Welcome");
-//        getSupportActionBar().setSubtitle(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-//
-//        getSupportActionBar().setHomeButtonEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        entryPresenter = new EntryListPresenter(this);
+
         entryPresenter.onSetActionBar("Hi,Welcome to your Journal");
 
         addEntryBtn = findViewById(R.id.fab);
@@ -74,9 +65,6 @@ public class EntryListActivity extends AppCompatActivity implements View.OnClick
         entryDeleteBtn = findViewById(R.id.entry_delete);
         entryEditBtn = findViewById(R.id.entry_update);
 
-//        firebaseAuth = FirebaseAuth.getInstance();
-//        mDatabase = FirebaseDatabase.getInstance().getReference("Entry").child(firebaseAuth.getUid());
-//        mDatabase.keepSynced(true);
 
         addEntryBtn.setOnClickListener(this);
 
@@ -84,107 +72,7 @@ public class EntryListActivity extends AppCompatActivity implements View.OnClick
         entryPresenter.setAdapter();
         entryPresenter.onStart();
 
-//        loadData();
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//        mRecyclerView.setAdapter(adapter);
-//        mRecyclerView.setLayoutManager(linearLayoutManager);
-
-
     }
-
-//    private void loadData(){
-//        Query query = FirebaseDatabase.getInstance()
-//                .getReference("Entry")
-//                .child(firebaseAuth.getUid())
-//                .limitToLast(50);
-//
-//        options = new FirebaseRecyclerOptions.Builder<EntryModel>()
-//                .setQuery(query, EntryModel.class)
-//                .build();
-//
-//        adapter = new FirebaseRecyclerAdapter<EntryModel,EntryHolder>(options){
-//
-//            @NonNull
-//            @Override
-//            public EntryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//                View view = LayoutInflater.from(parent.getContext())
-//                            .inflate(R.layout.entry_item_view,parent,false);
-//
-//                return new EntryHolder(view);
-//            }
-//
-//            @Override
-//            protected void onBindViewHolder(@NonNull final EntryHolder holder, final int position, @NonNull EntryModel model) {
-//                holder.content.setText(model.content);
-//                holder.title.setText(model.title);
-//                holder.date.setText(model.date);
-//                holder.letterTV.setText((model.getTitle()+"X").charAt(0)+"");
-//                holder.circleImage.setColorFilter(getRandomMaterialColor("400"));
-//                holder.entryDelete.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Library library = new Library(EntryListActivity.this);
-//                        library.AlertDialogInterface("Are you sure about deleting?", "Confirm", new Library.exitDecision() {
-//                            @Override
-//                            public void decision(boolean bool) {
-//                                if(bool){
-//                                    mDatabase.child(adapter.getRef(position).getKey()).removeValue();
-//                                    adapter.notifyDataSetChanged();
-//                                    finish();
-//                                }
-//                                else{
-//                                    finish();
-//                                }
-//                            }
-//                        });
-//                    }
-//                });
-//                holder.entryUpdate.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Main main = (Main) getApplicationContext();
-//                        main.setItemId(adapter.getRef(position).getKey());
-//
-//                        FragmentManager manager = getSupportFragmentManager();
-//                        EntryAddFragment fragment = new EntryAddFragment();
-//                        fragment.show(manager, "fragment");
-//
-//                    }
-//                });
-//
-//                holder.expandArrow.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        boolean shouldExpand = holder.expandContent.getVisibility() == View.GONE;
-//
-//                        ChangeBounds transition = new ChangeBounds();
-//                        transition.setDuration(200);
-//
-//                        if(shouldExpand){
-//                            holder.expandContent.setVisibility(View.VISIBLE);
-//                            holder.arrow.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
-//                            holder.expandArrow.setBackground(getResources().getDrawable(R.drawable.curved_linear_shape));
-//                            holder.expandArrow.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                            holder.expandContent.setBackgroundColor(getResources().getColor(R.color.expandcolor));
-//
-//                        }
-//                        else {
-//                            holder.expandContent.setVisibility(View.GONE);
-//                            holder.expandContent.setBackgroundColor(getResources().getColor(R.color.expandcolor));
-//                            holder.expandArrow.setBackgroundColor(getResources().getColor(R.color.collapsecolor));
-//                            holder.expandArrow.setBackground(getResources().getDrawable(R.drawable.curved_linear_shape));
-//                            holder.arrow.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
-//
-//                        }
-//
-//
-//                        TransitionManager.beginDelayedTransition(mRecyclerView, transition);
-//                        holder.expandArrow.setActivated(shouldExpand);
-//                    }
-//                });
-//            }
-//        };
-//    }
     @Override
     public void onClick(View v) {
         if(v == addEntryBtn){

@@ -2,7 +2,7 @@ package com.example.nejat.journalapptrail1.EntryAddition;
 
 import com.example.nejat.journalapptrail1.Utils.Main;
 
-public class EntryFragmentPresenter implements EntryFragmentContract.EntryFragmentPresenter,EntryFragmentContract.EntryFragmentModel.onAddEntry {
+public class EntryFragmentPresenter implements EntryFragmentContract.EntryFragmentPresenter, EntryFragmentContract.EntryFragmentModel.onAddEntry {
     private EntryAddFragment entryAddFragment;
     private EntryFragmentModel entryFragmentModel;
 
@@ -12,8 +12,8 @@ public class EntryFragmentPresenter implements EntryFragmentContract.EntryFragme
     }
 
     @Override
-    public void saveDataEntry(String title, String content,String date) {
-        entryFragmentModel.validateDateEntry(title,content,date, null,this);
+    public void saveDataEntry(String title, String content, String date) {
+        entryFragmentModel.validateDateEntry(title, content, date, null, this);
 
     }
 
@@ -39,8 +39,8 @@ public class EntryFragmentPresenter implements EntryFragmentContract.EntryFragme
     }
 
     @Override
-    public void updateDataEntry(String title, String content, String date,String itemId) {
-        entryFragmentModel.validateDateEntry(title,content,date, itemId,this);
+    public void updateDataEntry(String title, String content, String date, String itemId) {
+        entryFragmentModel.validateDateEntry(title, content, date, itemId, this);
 
     }
 }

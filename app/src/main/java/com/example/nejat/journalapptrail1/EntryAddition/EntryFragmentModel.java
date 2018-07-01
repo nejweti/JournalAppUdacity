@@ -14,7 +14,7 @@ public class EntryFragmentModel implements EntryFragmentContract.EntryFragmentMo
     private Main main;
 
     @Override
-    public void validateDateEntry(String title, String content, String date,String itemId,  onAddEntry onAddEntry) {
+    public void validateDateEntry(String title, String content, String date, String itemId, onAddEntry onAddEntry) {
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         myRef = FirebaseDatabase.getInstance().getReference("Entry").child(firebaseAuth.getUid());
@@ -22,14 +22,11 @@ public class EntryFragmentModel implements EntryFragmentContract.EntryFragmentMo
 
         if (TextUtils.isEmpty(title)) {
             onAddEntry.onTitleEmpty();
-        }
-        else if (TextUtils.isEmpty(content)) {
+        } else if (TextUtils.isEmpty(content)) {
             onAddEntry.onContentEmpty();
-        }
-        else if (TextUtils.isEmpty(date)) {
+        } else if (TextUtils.isEmpty(date)) {
             onAddEntry.onDateEmpty();
-        }
-        else{
+        } else {
             EntryModel entry = new EntryModel(title, content, date);
 
             if (itemId != null) {
@@ -41,7 +38,7 @@ public class EntryFragmentModel implements EntryFragmentContract.EntryFragmentMo
                 Log.i("insertion", "success" + itemId);
 
             }
-            onAddEntry.onSuccess(title,content,date);
+            onAddEntry.onSuccess(title, content, date);
         }
     }
 }

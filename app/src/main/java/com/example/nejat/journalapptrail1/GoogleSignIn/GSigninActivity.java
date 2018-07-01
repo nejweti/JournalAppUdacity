@@ -65,6 +65,7 @@ public class GSigninActivity extends AppCompatActivity implements GSigninContrac
         gsoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 gSigninPresenter.googleButtonClicked();
             }
         });
