@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#706677</color>
+    <color name="colorPrimaryDark">#565264</color>
+    <color name="coloritem">#a6808c</color>
+    <color name="collapsecolor">#ce6a85</color>
+    <color name="colorAccent">#d2bfc5</color>
+    <color name="expandcolor">#f6f2f3</color>
+
+</resources>

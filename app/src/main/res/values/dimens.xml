@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="elevation">10dp</dimen>
+    <dimen name="itemview_height">60dp</dimen>
+    <dimen name="circular_image_atttr">45dp</dimen>
+    <dimen name="circular_image_text_size">20dp</dimen>
+    <dimen name="title_size">18dp</dimen>
+    <dimen name="icon_margin_size">5dp</dimen>
+    <dimen name="floating_btn_margin_size">16dp</dimen>
+    <dimen name="main_title_size">40dp</dimen>
+    <dimen name="gsb_top_bottom_margin">20dp</dimen>
+    <dimen name="gsb_left_right_margin">25dp</dimen>
+    <dimen name="fragment_max_width">1000dp</dimen>
+    <dimen name="fragment_max_height">300dp</dimen>
+    <dimen name="edit_text_margin">5dp</dimen>
+</resources>
