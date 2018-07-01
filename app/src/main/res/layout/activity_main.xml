@@ -94,18 +94,19 @@
         android:layout_marginLeft="@dimen/gsb_left_right_margin"
         android:layout_marginRight="@dimen/gsb_left_right_margin"
         android:layout_weight="1"
-        android:weightSum="2"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_weight="1"
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center">
 
             <com.shobhitpuri.custombuttons.GoogleSignInButton
                 android:id="@+id/gso_btn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_centerInParent="true"
                 android:text="@string/google_signin"
                 android:layout_gravity="center"
@@ -113,37 +114,6 @@
                 app:isDarkTheme="false" />
         </LinearLayout>
 
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:weightSum="2">
-
-            <Button
-                android:layout_width="1dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Login"
-                android:background="#a6808c"
-                android:layout_margin="5dp"
-                android:fontFamily="monospace"
-                android:textColor="#ffffff"/>
-            <Button
-                android:layout_width="1dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:text="SignUp"
-                android:background="#a6808c"
-                android:fontFamily="monospace"
-                android:textColor="#ffffff"/>
-
-        </LinearLayout>
 
 
     </LinearLayout>
